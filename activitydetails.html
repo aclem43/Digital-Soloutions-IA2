@@ -23,6 +23,8 @@
             let elements = document.getElementsByClassName("editable")
 
             if (edit) {
+                document.getElementById("editbtn").hidden = true;
+                document.getElementById('svbtn').hidden = false;
                 let content;
                 for(let item of elements) {
                     content = item.innerText;
@@ -34,19 +36,18 @@
                         else {
                             item.innerHTML = `<input type="checkbox" >`;
                         }
-
                     }
                     else {
                         item.innerHTML = `<input autocomplete="false" value="${content}"> `;
                     }
                 }
-
                 for (let item of rows){
                     item.innerHTML = item.innerHTML + `<td class="delebtn"> ${item.id} <input type="button" value="Delete Row" /></td>`
                 }
-
             }
             else {
+                document.getElementById("editbtn").hidden = false;
+                document.getElementById('svbtn').hidden =true;
                 let content;
                 for(let item of elements) {
                     content = item.children[0];
@@ -90,7 +91,8 @@
         const load_activity_details = (activity) => {
             let edit;
             if (getParameterByName("usertype") === "teacher" || getParameterByName("usertype") === "admin" ) {
-                edit = `<input type="button" onclick="toggle_edit()" value="Toggle Edit ">`
+                edit = `<input id="editbtn" type="button" onclick="toggle_edit()" value="Edit">
+<input id="svbtn" type="button" onclick="toggle_edit()" value="Save" hidden>`
             }
             let html = `
 <div>
