@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="title">Title</title>
+    <link rel="stylesheet" href="static\index.css">
+    <script src="static/functions.js"></script>
+    <script src="static/components.js"></script>
+    <script src="static/data.js"></script>
+    <script>
+        const main = () => {
+            document.getElementById("header").innerHTML = getHeader(getParameterByName("usertype"));
+
+            load_detailed_activity()
+
+        }
+
+        let edit = false;
+        const toggle_edit = () => {
+            edit = !edit;
+
+            let rows = document.getElementsByClassName("itemrow")
+            let elements = document.getElementsByClassName("editable")
+
+            if (edit) {
+                let content;
+                for(let item of elements) {
+                    content = item.innerText;
+
+                    if (item.classList.contains("teacher")){
+                        if (content === "true"){
+                            item.innerHTML = `<input type="checkbox" checked >`;
+                        }
+                        else {
+                            item.innerHTML = `<input type="checkbox" >`;
+                        }
+
+                    }
+                    else {
+                        item.innerHTML = `<input autocomplete="false" value="${content}"> `;
+                    }
+                }
+
+                for (let item of rows){
+                    item.innerHTML = item.innerHTML + `<td class="delebtn"> ${item.id} <input type="button" value="Delete Row" /></td>`
+                }
+
+            }
+            else {
+                let content;
+                for(let item of elements) {
+                    content = item.children[0];
+                    if(content.type==='checkbox'){
+                        if(!content.checked){
+                            content.value = "false"
+                        }
+                        else {
+                            content.value = "true"
+                        }
+                    }
+                    item.innerText = `${content.value}`
+                }
+                let elts = document.getElementsByClassName("delebtn"), len = elts.length;
+                while(elts.length > 0){
+                    let item = elts[0];
+                    item.remove()
+                    elts = document.getElementsByClassName("delebtn");
+                }
+            }
+        }
+        const load_detailed_activity = () => {
+            const id = getParameterByName("activityid");
+            const subactivityid = getParameterByName(("subactivityid"));
+            const activity = get_detailed_activity(id);
+            let subactivity;
+
+            for (let subactivities of activity.subactivities) {
+
+                if (subactivities.id === parseInt(subactivityid)) {
+                    subactivity = subactivities;
+                    break;
+                }
+            }
+
+
+            document.getElementById("title").innerText = activity.name;
+
+
+            load_activity_details(subactivity)
+
+
+
+        }
+
+        const sub_activity_page = (id) => {
+            toPage("subactivitydetails.html",["subactivityid="+id])
+        }
+
+        const load_activity_details = (activity) => {
+            let edit = "";
+            if (getParameterByName("usertype") === "teacher" || getParameterByName("usertype") === "admin" ) {
+                edit = `<input type="button" onclick="toggle_edit()" value="Toggle Edit ">`
+            }
+            let html = `
+<div>
+    <h3 >${activity.name}</h3>
+</div>
+<p>${activity.description}</p>
+${edit}
+<h4>Participants:</h4>
+<div id="parcipitants"></div>
+            `
+
+            document.getElementById("detailed_activity").innerHTML=html;
+            let participantHtml = `
+
+<table style="border: black 1px solid"><th>Name</th><th>Grade</th><th>Teacher</th><th></th>`
+            console.log(activity)
+            activity.participants.forEach((participant)=>{
+                participantHtml = participantHtml + `
+<tr id="${participant.id}" class="itemrow"><td class="editable">${participant.name}</td><td class="editable">${participant.grade}</td><td class="editable teacher">${participant.teacher}</td></tr>
+            `
+            })
+            participantHtml += "</table>"
+            document.getElementById("parcipitants").innerHTML = participantHtml;
+
+
+        }
+
+    </script>
+</head>
+<body onload="main()" class="main">
+<div id="header"></div>
+<div id="detailed_activity" class="detailed_activity"></div>
+
+</body>

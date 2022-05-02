@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\index.css">
+    <script src="static/functions.js"></script>
+    <script src="static/components.js"></script>
+    <script src="static/md5.js"></script>
+    <script src="static/user.js"></script>
+    <script>
+        const main = () => {
+            document.getElementById("header").innerHTML = getHeader();
+        }
+
+
+        const login = () => {
+            const username = document.getElementById("userinput").value;
+            const password = document.getElementById("passinput").value;
+
+
+            const user = get_user_by_username(username);
+
+            //debugger
+            if(md5(password)=== user.password){
+                toPage("activities.html",["usertype="+user.permission])
+                return
+            }else {
+                toPage("loginfail.html")
+            }
+
+
+        }
+
+
+        </script>
+    <title>Document</title>
+</head>
+<body onload="main()" class="main">
+
+    <div id="header"></div>
+    <div>
+
+    </div>
+    <div id="logindiv" class="center login">
+        <h3 class="textcenter">Login</h3>
+        <div class="center flex row">
+            <div class="column1">Username:</div>
+            <input id="userinput" size="15" class="text_input column2" autocomplete="none">
+        </div>
+        <div class="center flex row">
+            <div class="column1">Password: </div>
+            <input id="passinput"  size="15" class="text_input column2" type="password" autocomplete="none">
+        </div>
+        <input type="button" value="Submit" class="loginButton" onclick="login()">
+    </div>
+
+</body>
+
+</html>
+

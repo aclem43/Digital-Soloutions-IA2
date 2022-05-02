@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static\index.css">
+    <script src="static/components.js"></script>
+    <script src="static/functions.js"></script>
+    <script src="static/data.js"></script>
+    <title >Activities</title>
+    <script>
+        const main = () => {
+            document.getElementById("header").innerHTML = getHeader(getParameterByName("usertype"));
+            load_activities()
+
+        }
+        const home = () => {
+            toPage("index.html")
+        }
+
+        const get_activities = () => {
+            return basic_activities
+        }
+
+        const activity_page = (id) => {
+            toPage("activitydetails.html",["activityid="+id])
+        }
+
+        const load_activities = () => {
+            let activity_html = "";
+            get_activities().forEach((activity)=> {
+                activity_html = activity_html +`
+<div id="activity.${activity.id}" class="activity" onclick="activity_page(${activity.id})">
+    <h3 class="activity_name">${activity.name}</h3>
+    <p class="activity_description">${activity.description}</p>
+</div>
+` + "\n";
+            })
+
+            document.getElementById("activities").innerHTML = activity_html;
+        }
+
+
+
+    </script>
+</head>
+<body onload="main()" class="main">
+    <div id="header"></div>
+    <div id="activities" class="activities"></div>
+</body>
+</html>

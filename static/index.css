@@ -1,0 +1,124 @@
+
+/* Util Classes */
+.textcenter {
+    text-align: center;
+}
+
+.textleft {
+    text-align: left;
+}
+
+.textright {
+    text-align: right;
+}
+
+.center {
+    margin: auto;
+    /* Need Width To Be Set To Work */
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+.column1 {
+    flex: 25%;
+}
+
+.column2 {
+    flex: 75%;
+}
+.text_input {
+    outline: none;
+}
+
+.flex {
+    display: flex;
+}
+
+/* Activity Styling */
+.activities{
+    background-color: rgb(171, 171, 171);
+    padding: 5px;
+    border-radius: 3px;
+
+}
+
+.detailed_activity{
+    background-color: rgb(171, 171, 171);
+    padding: 15px;
+    border-radius: 3px;
+}
+
+
+.activity {
+    margin:0% 1%;
+    padding: 0px 10px 0px 10px;
+    border-bottom: 4px solid #3f3f3f;
+    border-radius: 2px;
+
+}
+.activity:hover{
+    background-color: rgb(154, 154, 154);
+}
+.activity_name{
+}
+.activity_description {
+}
+/* Main Classes */
+
+.login {
+    max-width: 20%;
+    min-width: 200px;
+    border: rgb(84, 84, 84) solid 1px;
+    border-radius: 10px;
+    background-color: gray;
+    padding:10px;
+}
+
+.faillogin {
+    width: 20%;
+    border: rgb(84, 84, 84) solid 1px;
+    border-radius: 10px;
+    background-color: gray;
+    padding:10px;
+}
+.loginButton {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0;
+
+}
+
+.loginButton:hover{
+    background-color: rgb(193, 193, 193);
+    border: black solid 1px;
+}
+
+.permissionlevel {
+    border-radius: 2px;
+    color: rgb(251,188,64);
+
+}
+
+
+.logo {
+    margin: 10px 50px 10px 10px;
+
+}
+
+.main{
+    background-color: rgb(56, 84, 107);
+}
+.header{
+    background-color:rgb(1,29,66);
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    color: rgb(251,188,64);
+}
