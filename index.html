@@ -16,12 +16,16 @@
 
 
         const login = () => {
-            const username = document.getElementById("userinput").value;
-            const password = document.getElementById("passinput").value;
+            let username = document.getElementById("userinput").value;
+            let password = document.getElementById("passinput").value;
 
+            username.replace(/<[^>]*>?/gm, '')
 
             const user = get_user_by_username(username);
-
+            if (user == null){
+                toPage("loginfail.html")
+                return
+            }
             //debugger
             if(md5(password)=== user.password){
                 toPage("activities.html",["usertype="+user.permission])

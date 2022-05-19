@@ -18,24 +18,17 @@
         let edit = false;
         const toggle_edit = () => {
             edit = !edit;
-
             let rows = document.getElementsByClassName("itemrow")
             let elements = document.getElementsByClassName("editable")
-
             if (edit) {
                 document.getElementById("editbtn").hidden = true;
                 document.getElementById('svbtn').hidden = false;
                 let content;
                 for(let item of elements) {
                     content = item.innerText;
-
                     if (item.classList.contains("teacher")){
-                        if (content === "true"){
-                            item.innerHTML = `<input type="checkbox" checked >`;
-                        }
-                        else {
-                            item.innerHTML = `<input type="checkbox" >`;
-                        }
+                        if (content === "true"){item.innerHTML = `<input type="checkbox" checked >`;}
+                        else {item.innerHTML = `<input type="checkbox" >`;}
                     }
                     else {
                         item.innerHTML = `<input autocomplete="false" value="${content}"> `;
@@ -52,12 +45,8 @@
                 for(let item of elements) {
                     content = item.children[0];
                     if(content.type==='checkbox'){
-                        if(!content.checked){
-                            content.value = "false"
-                        }
-                        else {
-                            content.value = "true"
-                        }
+                        if(!content.checked){content.value = "false"}
+                        else {content.value = "true"}
                     }
                     item.innerText = `${content.value}`
                 }

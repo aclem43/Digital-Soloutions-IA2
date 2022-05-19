@@ -1,18 +1,3 @@
-const changeMenu = (current_menu,new_menu) => {
-    document.getElementById(current_menu).hidden = true
-    document.getElementById(new_menu).hidden = false
-}
-
-const backFailLogin = () => {
-    changeMenu("faillogin","logindiv")
-}
-
-const changeUser = (to) => {
-    if (to !== "Not logged In") {
-        document.getElementById("permissionlevel").innerText = "User:" + to;
-    }
-    document.getElementById("permissionlevel").innerText = to;
-}
 
 const toPage = (page,arguments) => {
     let url = page;
